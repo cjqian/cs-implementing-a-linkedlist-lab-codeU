@@ -219,7 +219,6 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public boolean remove(Object obj) {
-		// TODO: fill this in
         int index = indexOf(obj);
        
         //failure if object does not exist
@@ -286,14 +285,13 @@ public class MyLinkedList<E> implements List<E> {
 			throw new IndexOutOfBoundsException();
 		}
 		// TODO: classify this and improve it.
-		int i = 0;
+        // worst case, will traverse the entire list (subList(0, size)), so O(n)
+        // can be improved by only traversing items in list within bounds
 		MyLinkedList<E> list = new MyLinkedList<E>();
-		for (Node node=head; node != null; node = node.next) {
-			if (i >= fromIndex && i <= toIndex) {
-				list.add(node.cargo);
-			}
-			i++;
-		}
+        for (int i = fromIndex; i < toIndex; i++){
+            list.add(get(i));
+        }
+
 		return list;
 	}
 
